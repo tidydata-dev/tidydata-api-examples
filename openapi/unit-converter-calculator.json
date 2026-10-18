@@ -1,0 +1,87 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Unit Converter & Math Calculator",
+    "description": "Convert between 300+ units (length, weight, volume, temperature, speed, data, energy, time...) and evaluate math expressions safely (functions, constants, units, matrices).",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/units/convert": {
+      "get": {
+        "summary": "Convert units",
+        "operationId": "units_convert",
+        "parameters": [
+          {
+            "name": "value",
+            "in": "query",
+            "required": true,
+            "description": "Number",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "description": "Unit from",
+            "schema": {
+              "type": "string"
+            },
+            "example": "km"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "description": "Unit to",
+            "schema": {
+              "type": "string"
+            },
+            "example": "mile"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/math/evaluate": {
+      "get": {
+        "summary": "Evaluate expression",
+        "operationId": "math_eval",
+        "parameters": [
+          {
+            "name": "expr",
+            "in": "query",
+            "required": true,
+            "description": "Expression",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2*(3+4)^2 + sqrt(16)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

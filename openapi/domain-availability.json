@@ -1,0 +1,81 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Domain Availability API",
+    "description": "Check if domain names are available across many extensions in one call, using each registry's official RDAP data (with DNS fallback). Creation and expiry dates, registrar and .com name suggestions.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/domain-availability": {
+      "get": {
+        "summary": "Check availability",
+        "operationId": "availability",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "required": false,
+            "description": "One domain (example.com) or a comma-separated list in domains=",
+            "schema": {
+              "type": "string"
+            },
+            "example": "tidydata.ai"
+          },
+          {
+            "name": "domains",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated domains (max 20)",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "description": "Name without extension to check across tlds",
+            "schema": {
+              "type": "string"
+            },
+            "example": "tidydata"
+          },
+          {
+            "name": "tlds",
+            "in": "query",
+            "required": false,
+            "description": "Extensions for name= (default com,net,org,io,co,ai,app,dev)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "com,net,io,ai"
+          },
+          {
+            "name": "suggest",
+            "in": "query",
+            "required": false,
+            "description": "true to add available .com alternatives (getname.com, namehq.com...)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "false"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Time Zone Converter & World Clock",
+    "description": "Current time or any date in any IANA time zone, UTC offset, weekday and Unix time, and convert one moment to many time zones at once.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/time": {
+      "get": {
+        "summary": "Time in zones",
+        "operationId": "time",
+        "parameters": [
+          {
+            "name": "tz",
+            "in": "query",
+            "required": false,
+            "description": "IANA time zone",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Europe/Madrid"
+          },
+          {
+            "name": "datetime",
+            "in": "query",
+            "required": false,
+            "description": "ISO 8601 date-time (empty = now)",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated time zones to convert to",
+            "schema": {
+              "type": "string"
+            },
+            "example": "America/New_York,Asia/Tokyo"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

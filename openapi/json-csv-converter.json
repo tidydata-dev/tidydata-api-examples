@@ -1,0 +1,89 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "JSON to CSV & CSV to JSON Converter",
+    "description": "Convert JSON arrays (nested objects flattened) to CSV and CSV to JSON with auto delimiter detection, quoted fields and numbers.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/convert/json-to-csv": {
+      "post": {
+        "summary": "JSON to CSV",
+        "operationId": "json_to_csv",
+        "parameters": [
+          {
+            "name": "delimiter",
+            "in": "query",
+            "required": false,
+            "description": "Delimiter",
+            "schema": {
+              "type": "string"
+            },
+            "example": ","
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "[{\"name\":\"Ana\",\"address\":{\"city\":\"Madrid\"}}]"
+            }
+          }
+        }
+      }
+    },
+    "/v1/convert/csv-to-json": {
+      "post": {
+        "summary": "CSV to JSON",
+        "operationId": "csv_to_json",
+        "parameters": [
+          {
+            "name": "delimiter",
+            "in": "query",
+            "required": false,
+            "description": "Delimiter (auto if empty)",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "name,age\nAna,30"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User Agent Parser (browser, OS, device, bot)",
+    "description": "Parse any User-Agent string into browser and version, operating system and version, device type (mobile/tablet/desktop), rendering engine and bot detection.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/useragent": {
+      "get": {
+        "summary": "Parse user agent",
+        "operationId": "useragent",
+        "parameters": [
+          {
+            "name": "ua",
+            "in": "query",
+            "required": false,
+            "description": "User-Agent string (empty = the caller's)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

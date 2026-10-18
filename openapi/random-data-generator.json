@@ -1,0 +1,369 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Random Data Generator API - Users Products JSON",
+    "description": "Realistic random data for development, demos and seeding databases: users, addresses, companies, products, blog posts and transactions in 6 languages, or your own JSON schema. Repeatable with a seed.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/random/users": {
+      "get": {
+        "summary": "Random users",
+        "operationId": "users",
+        "parameters": [
+          {
+            "name": "count",
+            "in": "query",
+            "required": false,
+            "description": "How many records (1-100)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "description": "en, es, de, fr, it or pt",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          },
+          {
+            "name": "seed",
+            "in": "query",
+            "required": false,
+            "description": "Optional seed for repeatable output",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/random/addresses": {
+      "get": {
+        "summary": "Random addresses",
+        "operationId": "addresses",
+        "parameters": [
+          {
+            "name": "count",
+            "in": "query",
+            "required": false,
+            "description": "How many records (1-100)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "description": "en, es, de, fr, it or pt",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          },
+          {
+            "name": "seed",
+            "in": "query",
+            "required": false,
+            "description": "Optional seed for repeatable output",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/random/companies": {
+      "get": {
+        "summary": "Random companies",
+        "operationId": "companies",
+        "parameters": [
+          {
+            "name": "count",
+            "in": "query",
+            "required": false,
+            "description": "How many records (1-100)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "description": "en, es, de, fr, it or pt",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          },
+          {
+            "name": "seed",
+            "in": "query",
+            "required": false,
+            "description": "Optional seed for repeatable output",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/random/products": {
+      "get": {
+        "summary": "Random products",
+        "operationId": "products",
+        "parameters": [
+          {
+            "name": "count",
+            "in": "query",
+            "required": false,
+            "description": "How many records (1-100)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "description": "en, es, de, fr, it or pt",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          },
+          {
+            "name": "seed",
+            "in": "query",
+            "required": false,
+            "description": "Optional seed for repeatable output",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/random/posts": {
+      "get": {
+        "summary": "Random blog posts",
+        "operationId": "posts",
+        "parameters": [
+          {
+            "name": "count",
+            "in": "query",
+            "required": false,
+            "description": "How many records (1-100)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "description": "en, es, de, fr, it or pt",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          },
+          {
+            "name": "seed",
+            "in": "query",
+            "required": false,
+            "description": "Optional seed for repeatable output",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/random/transactions": {
+      "get": {
+        "summary": "Random transactions",
+        "operationId": "transactions",
+        "parameters": [
+          {
+            "name": "count",
+            "in": "query",
+            "required": false,
+            "description": "How many records (1-100)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "description": "en, es, de, fr, it or pt",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          },
+          {
+            "name": "seed",
+            "in": "query",
+            "required": false,
+            "description": "Optional seed for repeatable output",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/random/types": {
+      "get": {
+        "summary": "Field types for custom schemas",
+        "operationId": "types",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/random/schema": {
+      "post": {
+        "summary": "Records from your own schema",
+        "operationId": "schema",
+        "parameters": [
+          {
+            "name": "count",
+            "in": "query",
+            "required": false,
+            "description": "How many records (1-100)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "description": "en, es, de, fr, it or pt",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          },
+          {
+            "name": "seed",
+            "in": "query",
+            "required": false,
+            "description": "Optional seed for repeatable output",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              },
+              "example": {
+                "id": "uuid",
+                "name": "fullName",
+                "email": "email",
+                "city": "city",
+                "joined": "pastDate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

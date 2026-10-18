@@ -1,0 +1,153 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Public Holidays API (100+ countries, regions)",
+    "description": "Public and bank holidays for 100+ countries and their states/regions, any year, localized names, plus 'is this date a holiday?' check. Data: date-holidays (CC BY 3.0).",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/holidays": {
+      "get": {
+        "summary": "Holidays of a year",
+        "operationId": "holidays",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "query",
+            "required": true,
+            "description": "ISO country code",
+            "schema": {
+              "type": "string"
+            },
+            "example": "ES"
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "required": false,
+            "description": "Year",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "description": "State/region code",
+            "schema": {
+              "type": "string"
+            },
+            "example": "MD"
+          },
+          {
+            "name": "types",
+            "in": "query",
+            "required": false,
+            "description": "public, bank, optional, school, observance or all",
+            "schema": {
+              "type": "string"
+            },
+            "example": "public"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "description": "Language of names",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/holidays/is-holiday": {
+      "get": {
+        "summary": "Is it a holiday?",
+        "operationId": "is_holiday",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "query",
+            "required": true,
+            "description": "ISO country code",
+            "schema": {
+              "type": "string"
+            },
+            "example": "US"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "description": "YYYY-MM-DD",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-12-25"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "description": "State/region",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/holidays/regions": {
+      "get": {
+        "summary": "Countries and regions",
+        "operationId": "holiday_regions",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "query",
+            "required": false,
+            "description": "ISO country code (empty = list countries)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "DE"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

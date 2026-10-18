@@ -1,0 +1,41 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "IBAN Validator & Parser (80+ countries)",
+    "description": "Validate any IBAN (checksum, length, country format, national check digits) and split it into bank code, branch code and account number. Formatted and electronic forms, SEPA flag. Offline algorithm, no account lookups.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/iban/validate": {
+      "get": {
+        "summary": "Validate IBAN",
+        "operationId": "iban_validate",
+        "parameters": [
+          {
+            "name": "iban",
+            "in": "query",
+            "required": true,
+            "description": "IBAN (spaces allowed)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "ES91 2100 0418 4502 0005 1332"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "XML, YAML & JSON Converter",
+    "description": "Convert XML to JSON (attributes kept with @), JSON to XML, YAML to JSON and JSON to YAML. POST the document, get the converted result.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/convert/xml-to-json": {
+      "post": {
+        "summary": "XML to JSON",
+        "operationId": "xml_to_json",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/xml": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "<note id=\"1\"><to>Ana</to></note>"
+            }
+          }
+        }
+      }
+    },
+    "/v1/convert/json-to-xml": {
+      "post": {
+        "summary": "JSON to XML",
+        "operationId": "json_to_xml",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "{\"note\":{\"to\":\"Ana\"}}"
+            }
+          }
+        }
+      }
+    },
+    "/v1/convert/yaml-to-json": {
+      "post": {
+        "summary": "YAML to JSON",
+        "operationId": "yaml_to_json",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "name: Ana\ntags: [a, b]"
+            }
+          }
+        }
+      }
+    },
+    "/v1/convert/json-to-yaml": {
+      "post": {
+        "summary": "JSON to YAML",
+        "operationId": "json_to_yaml",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "{\"name\":\"Ana\",\"tags\":[\"a\",\"b\"]}"
+            }
+          }
+        }
+      }
+    }
+  }
+}

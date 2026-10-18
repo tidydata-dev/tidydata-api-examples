@@ -1,0 +1,51 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Link Preview & Metadata (Open Graph, Twitter Card, favicon)",
+    "description": "Everything you need to build link previews: title, description, image, favicon, site name, language, canonical URL, author, publish time, Twitter card and optional JSON-LD. Fast HTML streaming parser.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/preview": {
+      "get": {
+        "summary": "Link preview",
+        "operationId": "link_preview",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "description": "Page URL",
+            "schema": {
+              "type": "string"
+            },
+            "example": "https://github.com"
+          },
+          {
+            "name": "jsonld",
+            "in": "query",
+            "required": false,
+            "description": "true to include JSON-LD structured data",
+            "schema": {
+              "type": "string"
+            },
+            "example": "false"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

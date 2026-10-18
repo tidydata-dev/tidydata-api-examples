@@ -1,0 +1,166 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Profanity Filter API (detect & censor bad words, 25+ languages)",
+    "description": "Detect and censor profanity and offensive words in user-generated text. Supports 25+ languages (English, Spanish, French, German, Italian, Portuguese, Dutch, Russian, Japanese and more), leetspeak (sh1t, @ss), custom blocked words and an allow-list for false positives.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/profanity": {
+      "get": {
+        "summary": "Check and censor text",
+        "operationId": "profanity",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": true,
+            "description": "Text to check (or POST it as the body)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "What the f*** is this sh1t"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated language codes (en, es, fr, de, it, pt, nl, ru, ja...)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          },
+          {
+            "name": "fill",
+            "in": "query",
+            "required": false,
+            "description": "Character used to censor",
+            "schema": {
+              "type": "string"
+            },
+            "example": "*"
+          },
+          {
+            "name": "add",
+            "in": "query",
+            "required": false,
+            "description": "Extra words to block, comma-separated",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "allow",
+            "in": "query",
+            "required": false,
+            "description": "Words to never flag, comma-separated",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "leet",
+            "in": "query",
+            "required": false,
+            "description": "Detect leetspeak (true/false)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "post": {
+        "summary": "Check and censor text (POST text body)",
+        "operationId": "profanity_post",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated language codes (en, es, fr, de, it, pt, nl, ru, ja...)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          },
+          {
+            "name": "fill",
+            "in": "query",
+            "required": false,
+            "description": "Character used to censor",
+            "schema": {
+              "type": "string"
+            },
+            "example": "*"
+          },
+          {
+            "name": "add",
+            "in": "query",
+            "required": false,
+            "description": "Extra words to block, comma-separated",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "allow",
+            "in": "query",
+            "required": false,
+            "description": "Words to never flag, comma-separated",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "leet",
+            "in": "query",
+            "required": false,
+            "description": "Detect leetspeak (true/false)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "true"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "You are a stupid piece of sh1t"
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "PDF & Invoice Generator",
+    "description": "Create PDF documents from text or professional invoices from JSON (items, quantities, prices, tax, totals) in milliseconds. Returns the PDF file or Base64.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/pdf": {
+      "post": {
+        "summary": "Create PDF",
+        "operationId": "pdf",
+        "parameters": [
+          {
+            "name": "output",
+            "in": "query",
+            "required": false,
+            "description": "pdf or base64",
+            "schema": {
+              "type": "string"
+            },
+            "example": "pdf"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "{\"number\":\"2026-001\",\"from\":\"Your Company\",\"to\":\"Client Ltd\",\"currency\":\"EUR\",\"taxRate\":21,\"items\":[{\"description\":\"Consulting\",\"quantity\":2,\"price\":50}]}"
+            }
+          }
+        }
+      }
+    }
+  }
+}

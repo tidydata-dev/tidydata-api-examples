@@ -1,0 +1,61 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Sitemap URL Extractor",
+    "description": "Get all URLs of a website from its sitemaps (found via robots.txt), following sitemap indexes and .gz files, with lastmod, priority and changefreq. Filter by text.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/sitemap": {
+      "get": {
+        "summary": "Extract sitemap URLs",
+        "operationId": "sitemap_extractor",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "description": "Website or sitemap URL",
+            "schema": {
+              "type": "string"
+            },
+            "example": "https://apify.com"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Max URLs (1-5000)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1000"
+          },
+          {
+            "name": "contains",
+            "in": "query",
+            "required": false,
+            "description": "Only URLs containing this text",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

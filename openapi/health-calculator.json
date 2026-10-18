@@ -1,0 +1,411 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Health Calculator API - BMI Calories Macros",
+    "description": "Health and fitness calculators: BMI with category and healthy weight range, BMR, daily calories (TDEE) with lose/maintain/gain targets, macros, ideal weight (4 formulas) and body fat (U.S. Navy method). Metric or imperial.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/health/bmi": {
+      "get": {
+        "summary": "BMI",
+        "operationId": "bmi",
+        "parameters": [
+          {
+            "name": "weight",
+            "in": "query",
+            "required": true,
+            "description": "Weight (kg, or lb if units=imperial)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "70"
+          },
+          {
+            "name": "height",
+            "in": "query",
+            "required": true,
+            "description": "Height (cm, or inches if units=imperial)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "175"
+          },
+          {
+            "name": "units",
+            "in": "query",
+            "required": false,
+            "description": "metric or imperial",
+            "schema": {
+              "type": "string"
+            },
+            "example": "metric"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/health/bmr": {
+      "get": {
+        "summary": "Basal metabolic rate",
+        "operationId": "bmr",
+        "parameters": [
+          {
+            "name": "weight",
+            "in": "query",
+            "required": true,
+            "description": "Weight (kg, or lb if units=imperial)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "70"
+          },
+          {
+            "name": "height",
+            "in": "query",
+            "required": true,
+            "description": "Height (cm, or inches if units=imperial)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "175"
+          },
+          {
+            "name": "units",
+            "in": "query",
+            "required": false,
+            "description": "metric or imperial",
+            "schema": {
+              "type": "string"
+            },
+            "example": "metric"
+          },
+          {
+            "name": "age",
+            "in": "query",
+            "required": true,
+            "description": "Age in years",
+            "schema": {
+              "type": "string"
+            },
+            "example": "30"
+          },
+          {
+            "name": "sex",
+            "in": "query",
+            "required": true,
+            "description": "male or female",
+            "schema": {
+              "type": "string"
+            },
+            "example": "male"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/health/calories": {
+      "get": {
+        "summary": "Daily calories (TDEE)",
+        "operationId": "calories",
+        "parameters": [
+          {
+            "name": "weight",
+            "in": "query",
+            "required": true,
+            "description": "Weight (kg, or lb if units=imperial)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "70"
+          },
+          {
+            "name": "height",
+            "in": "query",
+            "required": true,
+            "description": "Height (cm, or inches if units=imperial)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "175"
+          },
+          {
+            "name": "units",
+            "in": "query",
+            "required": false,
+            "description": "metric or imperial",
+            "schema": {
+              "type": "string"
+            },
+            "example": "metric"
+          },
+          {
+            "name": "age",
+            "in": "query",
+            "required": true,
+            "description": "Age in years",
+            "schema": {
+              "type": "string"
+            },
+            "example": "30"
+          },
+          {
+            "name": "sex",
+            "in": "query",
+            "required": true,
+            "description": "male or female",
+            "schema": {
+              "type": "string"
+            },
+            "example": "male"
+          },
+          {
+            "name": "activity",
+            "in": "query",
+            "required": false,
+            "description": "sedentary, light, moderate, active, very_active",
+            "schema": {
+              "type": "string"
+            },
+            "example": "moderate"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/health/macros": {
+      "get": {
+        "summary": "Macros for a goal",
+        "operationId": "macros",
+        "parameters": [
+          {
+            "name": "weight",
+            "in": "query",
+            "required": true,
+            "description": "Weight (kg, or lb if units=imperial)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "70"
+          },
+          {
+            "name": "height",
+            "in": "query",
+            "required": true,
+            "description": "Height (cm, or inches if units=imperial)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "175"
+          },
+          {
+            "name": "units",
+            "in": "query",
+            "required": false,
+            "description": "metric or imperial",
+            "schema": {
+              "type": "string"
+            },
+            "example": "metric"
+          },
+          {
+            "name": "age",
+            "in": "query",
+            "required": true,
+            "description": "Age in years",
+            "schema": {
+              "type": "string"
+            },
+            "example": "30"
+          },
+          {
+            "name": "sex",
+            "in": "query",
+            "required": true,
+            "description": "male or female",
+            "schema": {
+              "type": "string"
+            },
+            "example": "male"
+          },
+          {
+            "name": "activity",
+            "in": "query",
+            "required": false,
+            "description": "Activity level",
+            "schema": {
+              "type": "string"
+            },
+            "example": "moderate"
+          },
+          {
+            "name": "goal",
+            "in": "query",
+            "required": false,
+            "description": "lose, maintain or gain",
+            "schema": {
+              "type": "string"
+            },
+            "example": "lose"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/health/ideal-weight": {
+      "get": {
+        "summary": "Ideal weight",
+        "operationId": "ideal_weight",
+        "parameters": [
+          {
+            "name": "height",
+            "in": "query",
+            "required": true,
+            "description": "Height (cm or inches)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "175"
+          },
+          {
+            "name": "sex",
+            "in": "query",
+            "required": true,
+            "description": "male or female",
+            "schema": {
+              "type": "string"
+            },
+            "example": "female"
+          },
+          {
+            "name": "units",
+            "in": "query",
+            "required": false,
+            "description": "metric or imperial",
+            "schema": {
+              "type": "string"
+            },
+            "example": "metric"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/health/body-fat": {
+      "get": {
+        "summary": "Body fat (Navy method)",
+        "operationId": "body_fat",
+        "parameters": [
+          {
+            "name": "height",
+            "in": "query",
+            "required": true,
+            "description": "Height",
+            "schema": {
+              "type": "string"
+            },
+            "example": "175"
+          },
+          {
+            "name": "neck",
+            "in": "query",
+            "required": true,
+            "description": "Neck circumference",
+            "schema": {
+              "type": "string"
+            },
+            "example": "38"
+          },
+          {
+            "name": "waist",
+            "in": "query",
+            "required": true,
+            "description": "Waist circumference",
+            "schema": {
+              "type": "string"
+            },
+            "example": "82"
+          },
+          {
+            "name": "hip",
+            "in": "query",
+            "required": false,
+            "description": "Hip circumference (female only)",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "sex",
+            "in": "query",
+            "required": true,
+            "description": "male or female",
+            "schema": {
+              "type": "string"
+            },
+            "example": "male"
+          },
+          {
+            "name": "units",
+            "in": "query",
+            "required": false,
+            "description": "metric or imperial",
+            "schema": {
+              "type": "string"
+            },
+            "example": "metric"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

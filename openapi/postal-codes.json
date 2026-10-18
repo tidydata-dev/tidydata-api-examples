@@ -1,0 +1,138 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Postal Code API - 121 Countries ZIP Lookup",
+    "description": "Postal code lookup for 121 countries and 1.8 million codes: place name, region, province, coordinates; distance between two postal codes; and postal code validation. Accepts codes with or without spaces and dashes.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/postal/{country}/{code}": {
+      "get": {
+        "summary": "Look up a postal code",
+        "operationId": "lookup",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "path",
+            "required": true,
+            "description": "ISO country code",
+            "schema": {
+              "type": "string"
+            },
+            "example": "US"
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "description": "Postal/ZIP code",
+            "schema": {
+              "type": "string"
+            },
+            "example": "90210"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/v1/postal/distance": {
+      "get": {
+        "summary": "Distance between postal codes",
+        "operationId": "distance",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "description": "COUNTRY:CODE",
+            "schema": {
+              "type": "string"
+            },
+            "example": "ES:37007"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "description": "COUNTRY:CODE",
+            "schema": {
+              "type": "string"
+            },
+            "example": "ES:28013"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/v1/postal/validate": {
+      "get": {
+        "summary": "Validate a postal code",
+        "operationId": "validate",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "query",
+            "required": true,
+            "description": "ISO country code",
+            "schema": {
+              "type": "string"
+            },
+            "example": "DE"
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "required": true,
+            "description": "Postal code",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10115"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/v1/postal/countries": {
+      "get": {
+        "summary": "Supported countries",
+        "operationId": "countries",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    }
+  }
+}

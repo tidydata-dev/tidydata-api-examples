@@ -1,0 +1,62 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Markdown to HTML Converter",
+    "description": "Convert GitHub-flavored Markdown (tables, lists, code) to safe HTML. Scripts and inline handlers are stripped by default.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/markdown": {
+      "post": {
+        "summary": "Convert Markdown",
+        "operationId": "markdown",
+        "parameters": [
+          {
+            "name": "output",
+            "in": "query",
+            "required": false,
+            "description": "json or html",
+            "schema": {
+              "type": "string"
+            },
+            "example": "json"
+          },
+          {
+            "name": "breaks",
+            "in": "query",
+            "required": false,
+            "description": "Line breaks as <br> (true/false)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "false"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "# Title\n\n**Bold** and a [link](https://example.com)."
+            }
+          }
+        }
+      }
+    }
+  }
+}

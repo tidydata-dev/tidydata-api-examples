@@ -1,0 +1,51 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "DNS Propagation Checker (6 global resolvers)",
+    "description": "Check if a DNS change has propagated: queries Cloudflare, Google, AdGuard, NextDNS, AliDNS and DNS.SB at once and reports agreement, consensus answer and response times.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/dns-propagation": {
+      "get": {
+        "summary": "Check propagation",
+        "operationId": "dns_propagation",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "required": true,
+            "description": "Domain",
+            "schema": {
+              "type": "string"
+            },
+            "example": "github.com"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "A, AAAA, CNAME, MX, NS, TXT, CAA, SOA",
+            "schema": {
+              "type": "string"
+            },
+            "example": "A"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

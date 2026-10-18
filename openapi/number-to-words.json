@@ -1,0 +1,78 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Number to Words API",
+    "description": "Convert numbers and money amounts to words in English, Spanish, French, German, Portuguese and Italian. Cheque and invoice wording with currencies, decimals, negatives and letter case.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/number-to-words": {
+      "get": {
+        "summary": "Number to words",
+        "operationId": "number_to_words",
+        "parameters": [
+          {
+            "name": "number",
+            "in": "query",
+            "required": true,
+            "description": "Number up to 999,999,999,999,999 (decimals with . or ,)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234.56"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "description": "en, es, fr, de, pt or it",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          },
+          {
+            "name": "currency",
+            "in": "query",
+            "required": false,
+            "description": "Optional: USD, EUR, GBP, MXN or BRL for amounts in words",
+            "schema": {
+              "type": "string"
+            },
+            "example": "USD"
+          },
+          {
+            "name": "case",
+            "in": "query",
+            "required": false,
+            "description": "lower (default), upper, sentence or title",
+            "schema": {
+              "type": "string"
+            },
+            "example": "sentence"
+          },
+          {
+            "name": "british",
+            "in": "query",
+            "required": false,
+            "description": "English only: add 'and' (one hundred and five)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "false"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Words"
+          }
+        }
+      }
+    }
+  }
+}

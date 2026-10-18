@@ -1,0 +1,133 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Hash Generator API - MD5 SHA256 HMAC CRC32",
+    "description": "Hash any text with MD5, SHA-1, SHA-256, SHA-384, SHA-512 and CRC32 in one call, sign messages with HMAC, and identify which algorithm produced a given hash.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/hash": {
+      "get": {
+        "summary": "Hash text",
+        "operationId": "hash",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": true,
+            "description": "Text to hash (or POST it as the body)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "hello"
+          },
+          {
+            "name": "algorithms",
+            "in": "query",
+            "required": false,
+            "description": "Comma list: md5,sha1,sha256,sha384,sha512,crc32",
+            "schema": {
+              "type": "string"
+            },
+            "example": "md5,sha256"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/hash/hmac": {
+      "get": {
+        "summary": "HMAC signature",
+        "operationId": "hmac",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": true,
+            "description": "Message",
+            "schema": {
+              "type": "string"
+            },
+            "example": "hello"
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "required": true,
+            "description": "Secret key",
+            "schema": {
+              "type": "string"
+            },
+            "example": "my-secret"
+          },
+          {
+            "name": "algorithm",
+            "in": "query",
+            "required": false,
+            "description": "sha1, sha256, sha384 or sha512",
+            "schema": {
+              "type": "string"
+            },
+            "example": "sha256"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/hash/verify": {
+      "get": {
+        "summary": "Identify / verify a hash",
+        "operationId": "verify",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": true,
+            "description": "Original text",
+            "schema": {
+              "type": "string"
+            },
+            "example": "hello"
+          },
+          {
+            "name": "hash",
+            "in": "query",
+            "required": true,
+            "description": "Hash to check",
+            "schema": {
+              "type": "string"
+            },
+            "example": "5d41402abc4b2a76b9719d911017c592"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

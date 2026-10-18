@@ -1,0 +1,13 @@
+# Emoji Search API - 6 Languages Shortcodes
+import os, requests
+
+r = requests.request(
+    "GET",
+    os.environ["TIDYDATA_BASE_URL"] + "/v1/emoji/search",
+    params={"q": "laugh", "locale": "en", "limit": "20"},
+    headers={
+             "X-RapidAPI-Key": os.environ["RAPIDAPI_KEY"],
+             "X-RapidAPI-Host": os.environ["RAPIDAPI_HOST"]},
+    timeout=30,
+)
+print(r.json())

@@ -1,0 +1,149 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Text Utilities (word count, readability, slug, hash, Base64)",
+    "description": "Handy text tools in one API: word/sentence count, reading time, Flesch readability and top words; URL slugs; SHA-1/256/384/512 hashes; Base64 encode/decode. GET with 'text' or POST the text.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/text/stats": {
+      "post": {
+        "summary": "Text statistics",
+        "operationId": "text_stats",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "Paste your text here."
+            }
+          }
+        }
+      }
+    },
+    "/v1/text/slug": {
+      "get": {
+        "summary": "Make URL slug",
+        "operationId": "text_slug",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": true,
+            "description": "Text",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Hello World! Ça va?"
+          },
+          {
+            "name": "separator",
+            "in": "query",
+            "required": false,
+            "description": "Separator",
+            "schema": {
+              "type": "string"
+            },
+            "example": "-"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/text/hash": {
+      "get": {
+        "summary": "Hash text",
+        "operationId": "text_hash",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": true,
+            "description": "Text",
+            "schema": {
+              "type": "string"
+            },
+            "example": "hello"
+          },
+          {
+            "name": "algorithm",
+            "in": "query",
+            "required": false,
+            "description": "sha1, sha256, sha384, sha512",
+            "schema": {
+              "type": "string"
+            },
+            "example": "sha256"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/text/base64": {
+      "get": {
+        "summary": "Base64",
+        "operationId": "text_base64",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": true,
+            "description": "Text",
+            "schema": {
+              "type": "string"
+            },
+            "example": "hello"
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "required": false,
+            "description": "encode or decode",
+            "schema": {
+              "type": "string"
+            },
+            "example": "encode"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

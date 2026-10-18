@@ -1,0 +1,41 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Domain Info & Availability (WHOIS/RDAP)",
+    "description": "Is a domain registered? Who is the registrar, when was it created, when does it expire, how old is it, its status and nameservers. Uses the official RDAP registry data (the modern WHOIS). No personal contact data.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/domain": {
+      "get": {
+        "summary": "Domain info",
+        "operationId": "domain_whois_rdap",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "required": true,
+            "description": "Domain name",
+            "schema": {
+              "type": "string"
+            },
+            "example": "apify.com"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

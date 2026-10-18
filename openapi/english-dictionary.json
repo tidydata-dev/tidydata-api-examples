@@ -1,0 +1,185 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "English Dictionary API - Definitions Synonyms Rhymes",
+    "description": "English dictionary with 147,000 words: definitions by part of speech, usage examples, synonyms, antonyms, broader terms, IPA and ARPAbet pronunciation, syllable count, rhymes and prefix autocomplete. Inflected forms (running, cities) resolve automatically.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/dictionary/{word}": {
+      "get": {
+        "summary": "Word definitions",
+        "operationId": "define",
+        "parameters": [
+          {
+            "name": "word",
+            "in": "path",
+            "required": true,
+            "description": "English word",
+            "schema": {
+              "type": "string"
+            },
+            "example": "happy"
+          },
+          {
+            "name": "pos",
+            "in": "query",
+            "required": false,
+            "description": "Optional filter: noun, verb, adjective, adverb",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Max meanings 1-50",
+            "schema": {
+              "type": "string"
+            },
+            "example": "20"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Word not found"
+          }
+        }
+      }
+    },
+    "/v1/dictionary/synonyms/{word}": {
+      "get": {
+        "summary": "Synonyms",
+        "operationId": "synonyms",
+        "parameters": [
+          {
+            "name": "word",
+            "in": "path",
+            "required": true,
+            "description": "English word",
+            "schema": {
+              "type": "string"
+            },
+            "example": "big"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Word not found"
+          }
+        }
+      }
+    },
+    "/v1/dictionary/antonyms/{word}": {
+      "get": {
+        "summary": "Antonyms",
+        "operationId": "antonyms",
+        "parameters": [
+          {
+            "name": "word",
+            "in": "path",
+            "required": true,
+            "description": "English word",
+            "schema": {
+              "type": "string"
+            },
+            "example": "good"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Word not found"
+          }
+        }
+      }
+    },
+    "/v1/dictionary/rhymes/{word}": {
+      "get": {
+        "summary": "Rhymes and pronunciation",
+        "operationId": "rhymes",
+        "parameters": [
+          {
+            "name": "word",
+            "in": "path",
+            "required": true,
+            "description": "English word",
+            "schema": {
+              "type": "string"
+            },
+            "example": "love"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Max rhymes 1-60",
+            "schema": {
+              "type": "string"
+            },
+            "example": "30"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Word not found"
+          }
+        }
+      }
+    },
+    "/v1/dictionary/search": {
+      "get": {
+        "summary": "Autocomplete words by prefix",
+        "operationId": "search",
+        "parameters": [
+          {
+            "name": "prefix",
+            "in": "query",
+            "required": true,
+            "description": "At least 2 letters",
+            "schema": {
+              "type": "string"
+            },
+            "example": "photo"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "1-100",
+            "schema": {
+              "type": "string"
+            },
+            "example": "20"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Word not found"
+          }
+        }
+      }
+    }
+  }
+}

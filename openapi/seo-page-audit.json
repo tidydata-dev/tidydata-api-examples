@@ -1,0 +1,41 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SEO Page Audit (on-page score)",
+    "description": "On-page SEO audit of any URL in one call: score 0-100 and a clear list of issues (title, meta description, H1, canonical, noindex, alt texts, lang, viewport, Open Graph, thin content, speed, HTTPS).",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/seo": {
+      "get": {
+        "summary": "Audit page",
+        "operationId": "seo_page_audit",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "description": "Page URL",
+            "schema": {
+              "type": "string"
+            },
+            "example": "https://example.com"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

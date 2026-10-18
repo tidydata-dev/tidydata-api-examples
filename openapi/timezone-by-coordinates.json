@@ -1,0 +1,61 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Timezone by Coordinates API (lat/lon to IANA zone)",
+    "description": "Get the IANA time zone for any latitude/longitude, with the current local time, UTC offset, abbreviation and whether daylight saving time is active. Optionally pass a datetime to get the offset at that moment.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/timezone/by-coordinates": {
+      "get": {
+        "summary": "Time zone for coordinates",
+        "operationId": "tz_by_coords",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "required": true,
+            "description": "Latitude",
+            "schema": {
+              "type": "string"
+            },
+            "example": "40.4168"
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "required": true,
+            "description": "Longitude",
+            "schema": {
+              "type": "string"
+            },
+            "example": "-3.7038"
+          },
+          {
+            "name": "datetime",
+            "in": "query",
+            "required": false,
+            "description": "ISO 8601 instant to evaluate (default: now)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-07-01T12:00:00Z"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

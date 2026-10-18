@@ -1,0 +1,126 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Text Summarization API",
+    "description": "Summarize any text or article URL in 50+ languages: picks the most important sentences (TextRank), with keywords and reading-time saved. No AI costs and no invented content.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/summarize": {
+      "get": {
+        "summary": "Summarize a text or URL",
+        "operationId": "summarize_get",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": false,
+            "description": "Text to summarize (up to 100,000 characters)",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "required": false,
+            "description": "Or an article URL to fetch and summarize",
+            "schema": {
+              "type": "string"
+            },
+            "example": "https://en.wikipedia.org/wiki/Spell_checker"
+          },
+          {
+            "name": "sentences",
+            "in": "query",
+            "required": false,
+            "description": "Number of sentences in the summary (default: about 20%, 3-5)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "3"
+          },
+          {
+            "name": "ratio",
+            "in": "query",
+            "required": false,
+            "description": "Or a fraction of the sentences, 0.05-0.6",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "description": "ISO 639-1 language or auto (default)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "auto"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Summary"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "post": {
+        "summary": "Summarize long text (body: plain text or JSON {text, sentences, lang})",
+        "operationId": "summarize_post",
+        "parameters": [
+          {
+            "name": "sentences",
+            "in": "query",
+            "required": false,
+            "description": "Number of sentences",
+            "schema": {
+              "type": "string"
+            },
+            "example": "3"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "description": "Language or auto",
+            "schema": {
+              "type": "string"
+            },
+            "example": "auto"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "Paste a long article here..."
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Summary"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

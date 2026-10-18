@@ -1,0 +1,97 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Rhymes & Syllables API",
+    "description": "Rhymes, syllable counts and pronunciation for English words, plus syllable counting for whole texts (per word and per line, with haiku detection). Perfect for songwriting, poetry and readability tools.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/rhymes/{word}": {
+      "get": {
+        "summary": "Rhyming words",
+        "operationId": "rhymes",
+        "parameters": [
+          {
+            "name": "word",
+            "in": "path",
+            "required": true,
+            "description": "English word",
+            "schema": {
+              "type": "string"
+            },
+            "example": "love"
+          },
+          {
+            "name": "syllables",
+            "in": "query",
+            "required": false,
+            "description": "Only rhymes with this number of syllables",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "1-200 (default 50)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "50"
+          },
+          {
+            "name": "all",
+            "in": "query",
+            "required": false,
+            "description": "true to include rare words and proper names",
+            "schema": {
+              "type": "string"
+            },
+            "example": "false"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/syllables": {
+      "get": {
+        "summary": "Count syllables in a text",
+        "operationId": "syllables",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": true,
+            "description": "Text (lines separated by \\n), max 20,000 characters",
+            "schema": {
+              "type": "string"
+            },
+            "example": "An old silent pond\nA frog jumps into the pond\nSplash! Silence again"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

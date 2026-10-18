@@ -1,0 +1,87 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Distance Calculator API",
+    "description": "Distance between any two places: coordinates, cities (\"Paris, FR\") or airport codes (MAD, JFK). Ellipsoidal (Vincenty) km, miles and nautical miles, bearing, compass, midpoint, flight time estimate and distance matrices.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/distance": {
+      "get": {
+        "summary": "Distance between two places",
+        "operationId": "distance",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "description": "Coordinates (40.4168,-3.7038), city (Madrid, ES) or airport code (MAD)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "MAD"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "description": "Same formats as from",
+            "schema": {
+              "type": "string"
+            },
+            "example": "JFK"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/distance/matrix": {
+      "get": {
+        "summary": "Distance matrix",
+        "operationId": "matrix",
+        "parameters": [
+          {
+            "name": "points",
+            "in": "query",
+            "required": true,
+            "description": "2-10 places separated by |",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Paris, FR|London, GB|New York|40.4168,-3.7038"
+          },
+          {
+            "name": "unit",
+            "in": "query",
+            "required": false,
+            "description": "km (default), mi or nmi",
+            "schema": {
+              "type": "string"
+            },
+            "example": "km"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

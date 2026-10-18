@@ -1,0 +1,41 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Security Headers Checker (grade A+ to F)",
+    "description": "Check the HTTP security headers of any website (HSTS, CSP, X-Frame-Options, Referrer-Policy, Permissions-Policy...) with a score, a grade and fixes to apply.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/security-headers": {
+      "get": {
+        "summary": "Check security headers",
+        "operationId": "security_headers",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "description": "Website URL",
+            "schema": {
+              "type": "string"
+            },
+            "example": "https://github.com"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

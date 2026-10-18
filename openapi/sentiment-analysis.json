@@ -1,0 +1,80 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Sentiment Analysis API",
+    "description": "Fast English sentiment analysis: positive, negative or neutral label, a -1 to +1 score and per-sentence results. Rule-based (VADER), deterministic, no AI costs.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/sentiment": {
+      "get": {
+        "summary": "Analyze sentiment",
+        "operationId": "sentiment_get",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": true,
+            "description": "Text to analyze (max 20,000 characters)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "The food was great but the service was painfully slow."
+          },
+          {
+            "name": "sentences",
+            "in": "query",
+            "required": false,
+            "description": "Include per-sentence results (true/false, default true)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sentiment scores"
+          }
+        }
+      },
+      "post": {
+        "summary": "Analyze sentiment (long text in body)",
+        "operationId": "sentiment_post",
+        "parameters": [
+          {
+            "name": "sentences",
+            "in": "query",
+            "required": false,
+            "description": "Include per-sentence results (true/false)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "true"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "I love this product! Shipping was slow, though."
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sentiment scores"
+          }
+        }
+      }
+    }
+  }
+}

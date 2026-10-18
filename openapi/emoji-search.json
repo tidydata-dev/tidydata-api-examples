@@ -1,0 +1,205 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Emoji Search API - 6 Languages Shortcodes",
+    "description": "Search all 1,949 emojis (Emoji 17) by keyword in 6 languages and get names, keywords, category, shortcodes, codepoints and HTML entities. Look up any emoji by character, hexcode or :shortcode:.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/emoji/search": {
+      "get": {
+        "summary": "Search emojis by keyword",
+        "operationId": "search",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "description": "Keyword",
+            "schema": {
+              "type": "string"
+            },
+            "example": "laugh"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "description": "en, es, de, fr, it or pt",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "1-100",
+            "schema": {
+              "type": "string"
+            },
+            "example": "20"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/emoji/{emoji}": {
+      "get": {
+        "summary": "Emoji details",
+        "operationId": "details",
+        "parameters": [
+          {
+            "name": "emoji",
+            "in": "path",
+            "required": true,
+            "description": "Emoji character, hexcode (1F525) or shortcode (:fire:)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1F525"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "description": "en, es, de, fr, it or pt",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/emoji/categories": {
+      "get": {
+        "summary": "Categories",
+        "operationId": "categories",
+        "parameters": [
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "description": "en, es, de, fr, it or pt",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/emoji/category/{name}": {
+      "get": {
+        "summary": "Emojis in a category",
+        "operationId": "category",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Category name",
+            "schema": {
+              "type": "string"
+            },
+            "example": "food & drink"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "description": "en, es, de, fr, it or pt",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/emoji/random": {
+      "get": {
+        "summary": "Random emojis",
+        "operationId": "random",
+        "parameters": [
+          {
+            "name": "count",
+            "in": "query",
+            "required": false,
+            "description": "1-50",
+            "schema": {
+              "type": "string"
+            },
+            "example": "3"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "description": "Optional category",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "required": false,
+            "description": "en, es, de, fr, it or pt",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

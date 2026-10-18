@@ -1,0 +1,51 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Color Converter, Palettes & Contrast Checker",
+    "description": "Convert colors between HEX, RGB, HSL and CMYK, get complementary, analogous, triadic palettes, shades and tints, the best text color and WCAG contrast ratio.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/color": {
+      "get": {
+        "summary": "Color info",
+        "operationId": "color",
+        "parameters": [
+          {
+            "name": "color",
+            "in": "query",
+            "required": true,
+            "description": "hex, rgb() or hsl()",
+            "schema": {
+              "type": "string"
+            },
+            "example": "ff8800"
+          },
+          {
+            "name": "compare",
+            "in": "query",
+            "required": false,
+            "description": "Second color for contrast",
+            "schema": {
+              "type": "string"
+            },
+            "example": "ffffff"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

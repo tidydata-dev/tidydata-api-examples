@@ -1,0 +1,61 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Synonyms API - Thesaurus",
+    "description": "English thesaurus: synonyms, antonyms and related words for 147,000 words, ranked and grouped by meaning with part of speech and definitions. Handles inflected forms (running → run).",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/thesaurus/{word}": {
+      "get": {
+        "summary": "Synonyms and antonyms",
+        "operationId": "thesaurus",
+        "parameters": [
+          {
+            "name": "word",
+            "in": "path",
+            "required": true,
+            "description": "English word or phrase",
+            "schema": {
+              "type": "string"
+            },
+            "example": "happy"
+          },
+          {
+            "name": "pos",
+            "in": "query",
+            "required": false,
+            "description": "Filter by part of speech: noun, verb, adjective or adverb",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Max words per list, 1-200 (default 30)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "30"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

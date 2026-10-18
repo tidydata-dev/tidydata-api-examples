@@ -1,0 +1,110 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Keyword Extraction API",
+    "description": "Extract the key phrases and most frequent words of any text in 50+ languages (RAKE algorithm with language stopwords). Auto language detection, scores and counts.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/keywords": {
+      "get": {
+        "summary": "Extract keywords",
+        "operationId": "keywords_get",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": true,
+            "description": "Text to analyze (max 100,000 characters)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Cloudflare Workers let developers deploy serverless code to a global edge network with low latency and automatic scaling."
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "description": "ISO 639-1 language code or auto (default)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "auto"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Max keyphrases and words (1-50, default 10)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          },
+          {
+            "name": "max_words",
+            "in": "query",
+            "required": false,
+            "description": "Max words per keyphrase (1-5, default 3)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "3"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Keyphrases and top words"
+          }
+        }
+      },
+      "post": {
+        "summary": "Extract keywords (long text in body)",
+        "operationId": "keywords_post",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "description": "ISO 639-1 language code or auto",
+            "schema": {
+              "type": "string"
+            },
+            "example": "auto"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Max results (1-50)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "Paste a long article here."
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Keyphrases and top words"
+          }
+        }
+      }
+    }
+  }
+}

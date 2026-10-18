@@ -1,0 +1,189 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Airport Data API (9,500 airports, IATA/ICAO, distance)",
+    "description": "Airport lookup by IATA or ICAO code, search by name or city, nearest airports to any coordinates and great-circle distance and flight time between two airports. 9,500 airports with coordinates, elevation, country, region and city.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/airports/{code}": {
+      "get": {
+        "summary": "Airport by code",
+        "operationId": "airport_by_code",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "description": "IATA (MAD) or ICAO (LEMD)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "MAD"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/airports/search": {
+      "get": {
+        "summary": "Search airports",
+        "operationId": "airport_search",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "description": "Name, city or code",
+            "schema": {
+              "type": "string"
+            },
+            "example": "london"
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "required": false,
+            "description": "ISO country filter",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "1-100",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/airports/nearby": {
+      "get": {
+        "summary": "Nearest airports",
+        "operationId": "airport_nearby",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "required": true,
+            "description": "Latitude",
+            "schema": {
+              "type": "string"
+            },
+            "example": "40.96"
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "required": true,
+            "description": "Longitude",
+            "schema": {
+              "type": "string"
+            },
+            "example": "-5.66"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "required": false,
+            "description": "Radius km",
+            "schema": {
+              "type": "string"
+            },
+            "example": "200"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "large, medium or small",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "1-100",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/airports/distance": {
+      "get": {
+        "summary": "Distance between airports",
+        "operationId": "airport_distance",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "description": "IATA/ICAO",
+            "schema": {
+              "type": "string"
+            },
+            "example": "MAD"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "description": "IATA/ICAO",
+            "schema": {
+              "type": "string"
+            },
+            "example": "JFK"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

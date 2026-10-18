@@ -1,0 +1,131 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Initials Avatar API",
+    "description": "Generate clean initials avatars (SVG) from any name: deterministic brand colors, circle, rounded or square, custom colors and sizes. Unicode names supported. Also returns a data URI.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/avatar": {
+      "get": {
+        "summary": "Initials avatar",
+        "operationId": "avatar",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "description": "Person, team or company name",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Jane Doe"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "description": "16-1024 px (default 128)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "128"
+          },
+          {
+            "name": "shape",
+            "in": "query",
+            "required": false,
+            "description": "circle (default), rounded or square",
+            "schema": {
+              "type": "string"
+            },
+            "example": "circle"
+          },
+          {
+            "name": "background",
+            "in": "query",
+            "required": false,
+            "description": "Hex color or auto (deterministic color from the name)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "auto"
+          },
+          {
+            "name": "color",
+            "in": "query",
+            "required": false,
+            "description": "Text hex color or auto (best contrast)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "auto"
+          },
+          {
+            "name": "length",
+            "in": "query",
+            "required": false,
+            "description": "Number of initials, 1-3 (default 2)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2"
+          },
+          {
+            "name": "initials",
+            "in": "query",
+            "required": false,
+            "description": "Force custom initials (max 3 characters)",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "bold",
+            "in": "query",
+            "required": false,
+            "description": "true/false (default true)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "true"
+          },
+          {
+            "name": "font_size",
+            "in": "query",
+            "required": false,
+            "description": "Font scale 0.2-0.9 (default 0.42)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "0.42"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "description": "svg (default, the image) or json (colors + SVG + data URI)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "svg"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SVG image or JSON"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

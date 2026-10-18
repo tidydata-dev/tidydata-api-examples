@@ -1,0 +1,81 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Placeholder Image Generator (SVG)",
+    "description": "Instant placeholder images of any size with custom background, text color and label. Lightweight SVG, cached worldwide. Perfect for mockups and prototypes.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/placeholder": {
+      "get": {
+        "summary": "Placeholder image",
+        "operationId": "placeholder",
+        "parameters": [
+          {
+            "name": "width",
+            "in": "query",
+            "required": true,
+            "description": "Width px",
+            "schema": {
+              "type": "string"
+            },
+            "example": "600"
+          },
+          {
+            "name": "height",
+            "in": "query",
+            "required": false,
+            "description": "Height px",
+            "schema": {
+              "type": "string"
+            },
+            "example": "400"
+          },
+          {
+            "name": "bg",
+            "in": "query",
+            "required": false,
+            "description": "Background hex",
+            "schema": {
+              "type": "string"
+            },
+            "example": "cccccc"
+          },
+          {
+            "name": "color",
+            "in": "query",
+            "required": false,
+            "description": "Text hex",
+            "schema": {
+              "type": "string"
+            },
+            "example": "555555"
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "required": false,
+            "description": "Label",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

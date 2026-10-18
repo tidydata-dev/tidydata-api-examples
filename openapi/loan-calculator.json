@@ -1,0 +1,124 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Loan & Mortgage Calculator API",
+    "description": "Monthly payment, total interest and full amortization schedule for loans and mortgages. Down payment, extra payments, weekly/biweekly/monthly frequency and yearly summaries.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/loan": {
+      "get": {
+        "summary": "Calculate loan or mortgage",
+        "operationId": "loan",
+        "parameters": [
+          {
+            "name": "amount",
+            "in": "query",
+            "required": false,
+            "description": "Loan amount (or use price + down_payment)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "200000"
+          },
+          {
+            "name": "price",
+            "in": "query",
+            "required": false,
+            "description": "Property price (mortgages)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "down_payment",
+            "in": "query",
+            "required": false,
+            "description": "Down payment (with price)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rate",
+            "in": "query",
+            "required": true,
+            "description": "Annual interest rate in % (e.g. 4.5)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "4.5"
+          },
+          {
+            "name": "years",
+            "in": "query",
+            "required": false,
+            "description": "Term in years (or months)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "30"
+          },
+          {
+            "name": "months",
+            "in": "query",
+            "required": false,
+            "description": "Term in months (instead of years)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "frequency",
+            "in": "query",
+            "required": false,
+            "description": "monthly (default), biweekly, weekly, quarterly or annually",
+            "schema": {
+              "type": "string"
+            },
+            "example": "monthly"
+          },
+          {
+            "name": "extra_payment",
+            "in": "query",
+            "required": false,
+            "description": "Extra principal paid every period",
+            "schema": {
+              "type": "string"
+            },
+            "example": "0"
+          },
+          {
+            "name": "schedule",
+            "in": "query",
+            "required": false,
+            "description": "summary (default), yearly or full",
+            "schema": {
+              "type": "string"
+            },
+            "example": "yearly"
+          },
+          {
+            "name": "monthly_costs",
+            "in": "query",
+            "required": false,
+            "description": "Optional monthly insurance/taxes added to the payment",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment and schedule"
+          }
+        }
+      }
+    }
+  }
+}

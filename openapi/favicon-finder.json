@@ -1,0 +1,41 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Favicon & Website Icon Finder",
+    "description": "Find all icons of a website (favicon.ico, PNG/SVG icons, Apple touch icons, manifest icons) with sizes, sorted from best to smallest.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/favicon": {
+      "get": {
+        "summary": "Find icons",
+        "operationId": "favicon",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "description": "Website URL",
+            "schema": {
+              "type": "string"
+            },
+            "example": "https://github.com"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "URL Unshortener / Link Expander",
+    "description": "Expand short links (bit.ly, t.co, tinyurl and any redirect) to their final destination, with every hop of the redirect chain. Check where a link really goes before clicking it.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/unshorten": {
+      "get": {
+        "summary": "Expand short URL",
+        "operationId": "url_unshortener",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "description": "Short URL",
+            "schema": {
+              "type": "string"
+            },
+            "example": "https://bit.ly/3Xx"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

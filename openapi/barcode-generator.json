@@ -1,0 +1,91 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Barcode Generator (Code 128, EAN-13) SVG",
+    "description": "Generate scannable Code 128 and EAN-13 barcodes as crisp SVG, with automatic check digit, custom height and bar width.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/barcode": {
+      "get": {
+        "summary": "Generate barcode",
+        "operationId": "barcode",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "query",
+            "required": true,
+            "description": "Text or digits to encode",
+            "schema": {
+              "type": "string"
+            },
+            "example": "ABC-12345"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "code128 or ean13",
+            "schema": {
+              "type": "string"
+            },
+            "example": "code128"
+          },
+          {
+            "name": "height",
+            "in": "query",
+            "required": false,
+            "description": "Bar height px",
+            "schema": {
+              "type": "string"
+            },
+            "example": "100"
+          },
+          {
+            "name": "module",
+            "in": "query",
+            "required": false,
+            "description": "Narrow bar width px",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2"
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "required": false,
+            "description": "Show human-readable text (true/false)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "true"
+          },
+          {
+            "name": "output",
+            "in": "query",
+            "required": false,
+            "description": "svg or json",
+            "schema": {
+              "type": "string"
+            },
+            "example": "svg"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

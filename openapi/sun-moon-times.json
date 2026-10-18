@@ -1,0 +1,127 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Sunrise Sunset & Moon Phase API (twilight, golden hour)",
+    "description": "Sunrise, sunset, solar noon, day length, civil/nautical/astronomical twilight and golden hour for any coordinates and date, plus moon phase, illumination, moonrise/moonset and next full and new moon. Times are returned in the local time zone, detected automatically from the coordinates.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/sun": {
+      "get": {
+        "summary": "Sun times",
+        "operationId": "sun",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "required": true,
+            "description": "Latitude",
+            "schema": {
+              "type": "string"
+            },
+            "example": "40.4168"
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "required": true,
+            "description": "Longitude",
+            "schema": {
+              "type": "string"
+            },
+            "example": "-3.7038"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "description": "Date YYYY-MM-DD (default: today)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-06-21"
+          },
+          {
+            "name": "tz",
+            "in": "query",
+            "required": false,
+            "description": "IANA time zone for the returned times, or 'auto' (detected from coordinates)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "auto"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/moon": {
+      "get": {
+        "summary": "Moon phase and times",
+        "operationId": "moon",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "required": true,
+            "description": "Latitude",
+            "schema": {
+              "type": "string"
+            },
+            "example": "40.4168"
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "required": true,
+            "description": "Longitude",
+            "schema": {
+              "type": "string"
+            },
+            "example": "-3.7038"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "description": "Date YYYY-MM-DD (default: today)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-06-21"
+          },
+          {
+            "name": "tz",
+            "in": "query",
+            "required": false,
+            "description": "IANA time zone for the returned times, or 'auto' (detected from coordinates)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "auto"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

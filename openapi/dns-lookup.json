@@ -1,0 +1,51 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "DNS Lookup (A, AAAA, MX, NS, TXT, CNAME, SOA, CAA)",
+    "description": "Look up DNS records of any domain in one call: A, AAAA, MX, NS, TXT, CNAME, SOA, CAA, SRV. Also tells you if the domain has mail servers and its SPF record. Fast, uses public resolvers.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/dns": {
+      "get": {
+        "summary": "DNS records",
+        "operationId": "dns_lookup",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "required": true,
+            "description": "Domain name",
+            "schema": {
+              "type": "string"
+            },
+            "example": "github.com"
+          },
+          {
+            "name": "types",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated record types",
+            "schema": {
+              "type": "string"
+            },
+            "example": "A,AAAA,MX,NS,TXT,CNAME"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Currency Exchange Rates (ECB, 30+ currencies)",
+    "description": "Daily euro foreign exchange reference rates for 30+ currencies, any base currency, conversion and history of the last 90 days. Source: ECB statistics.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/fx/latest": {
+      "get": {
+        "summary": "Latest rates",
+        "operationId": "fx_latest",
+        "parameters": [
+          {
+            "name": "base",
+            "in": "query",
+            "required": false,
+            "description": "Base currency (default EUR)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "USD"
+          },
+          {
+            "name": "symbols",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated currencies to return",
+            "schema": {
+              "type": "string"
+            },
+            "example": "EUR,GBP,JPY"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "description": "Optional date YYYY-MM-DD (last 90 days)",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/fx/convert": {
+      "get": {
+        "summary": "Convert amount",
+        "operationId": "fx_convert",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "description": "From currency",
+            "schema": {
+              "type": "string"
+            },
+            "example": "EUR"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "description": "To currency",
+            "schema": {
+              "type": "string"
+            },
+            "example": "USD"
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "required": false,
+            "description": "Amount",
+            "schema": {
+              "type": "string"
+            },
+            "example": "100"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "description": "Optional date YYYY-MM-DD",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

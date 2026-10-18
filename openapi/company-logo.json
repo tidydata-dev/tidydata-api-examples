@@ -1,0 +1,81 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Company Logo API",
+    "description": "Get any company's logo and icon from its domain: best square icon at your size, full logo, brand color and site name, or the image itself. Initials fallback. Replacement for the retired Clearbit Logo API.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/logo": {
+      "get": {
+        "summary": "Logo and icon for a domain",
+        "operationId": "logo",
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "required": true,
+            "description": "Company domain or website URL",
+            "schema": {
+              "type": "string"
+            },
+            "example": "stripe.com"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "description": "Preferred icon size in px, 16-1024 (default 128): returns the smallest icon at or above it",
+            "schema": {
+              "type": "string"
+            },
+            "example": "128"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "description": "json (default: URLs, sizes, sources, brand color, name) or image (the image bytes, ready for <img>)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "json"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "icon (square brand mark, default) or logo (full logo, often a wordmark)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "icon"
+          },
+          {
+            "name": "fallback",
+            "in": "query",
+            "required": false,
+            "description": "initials (default: an SVG initials avatar when no logo exists) or none (404)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "initials"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Logo data or image"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

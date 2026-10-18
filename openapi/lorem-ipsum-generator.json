@@ -1,0 +1,101 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Lorem Ipsum Generator API (paragraphs, sentences, HTML)",
+    "description": "Generate lorem ipsum placeholder text as paragraphs, sentences, words, list items or titles, in JSON, plain text or ready-to-paste HTML. Reproducible output with a seed.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/lorem": {
+      "get": {
+        "summary": "Generate placeholder text",
+        "operationId": "lorem",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "paragraphs, sentences, words, list or title",
+            "schema": {
+              "type": "string"
+            },
+            "example": "paragraphs"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "required": false,
+            "description": "How many (max 50 paragraphs / 500 sentences / 5000 words)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "3"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "description": "json, text or html",
+            "schema": {
+              "type": "string"
+            },
+            "example": "json"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "description": "Start with 'Lorem ipsum dolor sit amet' (true/false)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "true"
+          },
+          {
+            "name": "seed",
+            "in": "query",
+            "required": false,
+            "description": "Optional seed for reproducible output",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "minWords",
+            "in": "query",
+            "required": false,
+            "description": "Min words per sentence",
+            "schema": {
+              "type": "string"
+            },
+            "example": "6"
+          },
+          {
+            "name": "maxWords",
+            "in": "query",
+            "required": false,
+            "description": "Max words per sentence",
+            "schema": {
+              "type": "string"
+            },
+            "example": "14"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

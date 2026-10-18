@@ -1,0 +1,138 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Nutrition Facts API (USDA, 7,700 foods, calories, macros)",
+    "description": "Search 7,793 generic foods and get calories, protein, fat, carbohydrates, fiber, sugars, vitamins and minerals (36 nutrients) per 100 g or for any amount, with common portion sizes (cup, slice, piece). Calculate totals for a whole recipe or meal in one request.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/nutrition/search": {
+      "get": {
+        "summary": "Search foods",
+        "operationId": "nutrition_search",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "description": "Food name in English",
+            "schema": {
+              "type": "string"
+            },
+            "example": "chicken breast"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "description": "Optional category filter (see /categories)",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "1-50",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/nutrition/food/{fdcId}": {
+      "get": {
+        "summary": "Food details",
+        "operationId": "nutrition_food",
+        "parameters": [
+          {
+            "name": "fdcId",
+            "in": "path",
+            "required": true,
+            "description": "Food id from search",
+            "schema": {
+              "type": "string"
+            },
+            "example": "173944"
+          },
+          {
+            "name": "grams",
+            "in": "query",
+            "required": false,
+            "description": "Optional amount in grams to scale nutrients",
+            "schema": {
+              "type": "string"
+            },
+            "example": "120"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/nutrition/calculate": {
+      "get": {
+        "summary": "Recipe / meal totals",
+        "operationId": "nutrition_calculate",
+        "parameters": [
+          {
+            "name": "items",
+            "in": "query",
+            "required": true,
+            "description": "food:grams pairs separated by ; (or POST JSON {\"items\":[{\"query\":\"banana\",\"grams\":120}]})",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eggs:100;oats:50;whole milk:200"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/nutrition/categories": {
+      "get": {
+        "summary": "Food categories",
+        "operationId": "nutrition_categories",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

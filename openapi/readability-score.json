@@ -1,0 +1,86 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Readability Score API (Flesch, Gunning Fog, SMOG, Spanish)",
+    "description": "Readability metrics for any text: Flesch Reading Ease, Flesch-Kincaid Grade, Gunning Fog, SMOG, Coleman-Liau, ARI and LIX for English, plus Fernandez-Huerta and Szigriszt-Pazos (INFLESZ scale) for Spanish. Also word, sentence and syllable counts and reading/speaking time.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/readability": {
+      "get": {
+        "summary": "Readability metrics",
+        "operationId": "readability",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": true,
+            "description": "Text to analyse (or POST it as the body)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "The quick brown fox jumps over the lazy dog. It was a sunny day."
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "description": "en or es",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "post": {
+        "summary": "Readability metrics (POST text body)",
+        "operationId": "readability_post",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "description": "en or es",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "Readability formulas estimate how easy a text is to read. Short sentences and short words make text easier."
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

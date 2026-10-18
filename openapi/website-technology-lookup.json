@@ -1,0 +1,41 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Website Technology Lookup (CMS, frameworks, analytics)",
+    "description": "Detect 130+ technologies a website uses: CMS (WordPress, Shopify, Wix, Webflow), frameworks (React, Next.js, Vue), analytics and pixels, chat, CDN and hosting. Great for lead generation and competitor research.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/tech": {
+      "get": {
+        "summary": "Detect technologies",
+        "operationId": "website_technology_lookup",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "description": "Website URL",
+            "schema": {
+              "type": "string"
+            },
+            "example": "https://wordpress.org"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

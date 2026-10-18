@@ -1,0 +1,101 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "QR Code Generator (SVG, colors, fast)",
+    "description": "Fast QR codes as crisp SVG: any text or link, custom size, colors, margin and error correction. Returns the SVG image directly or JSON with a data URI. ~50 ms, no rate-limit surprises.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/qr": {
+      "get": {
+        "summary": "Generate QR code",
+        "operationId": "qr_code_generator",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "query",
+            "required": true,
+            "description": "Text or link to encode (max 2000 chars)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "https://example.com"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "description": "Image size in px (64-2000)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "300"
+          },
+          {
+            "name": "margin",
+            "in": "query",
+            "required": false,
+            "description": "Quiet border in modules (0-10)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2"
+          },
+          {
+            "name": "ecc",
+            "in": "query",
+            "required": false,
+            "description": "Error correction: low, medium, quartile, high",
+            "schema": {
+              "type": "string"
+            },
+            "example": "medium"
+          },
+          {
+            "name": "dark",
+            "in": "query",
+            "required": false,
+            "description": "Hex color of modules",
+            "schema": {
+              "type": "string"
+            },
+            "example": "000000"
+          },
+          {
+            "name": "light",
+            "in": "query",
+            "required": false,
+            "description": "Hex background color",
+            "schema": {
+              "type": "string"
+            },
+            "example": "ffffff"
+          },
+          {
+            "name": "output",
+            "in": "query",
+            "required": false,
+            "description": "svg (image) or json",
+            "schema": {
+              "type": "string"
+            },
+            "example": "svg"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

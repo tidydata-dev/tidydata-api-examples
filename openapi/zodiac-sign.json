@@ -1,0 +1,102 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Zodiac Sign API - Western and Chinese Astrology",
+    "description": "Exact zodiac sign from a birth date, time and time zone (computed from the Sun's real position, so cusp birthdays are right) plus the Chinese zodiac from the real lunisolar calendar: animal, element, yin/yang and the year's start and end dates.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/zodiac": {
+      "get": {
+        "summary": "Signs for a birth date",
+        "operationId": "zodiac",
+        "parameters": [
+          {
+            "name": "birthdate",
+            "in": "query",
+            "required": true,
+            "description": "YYYY-MM-DD",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1999-02-12"
+          },
+          {
+            "name": "time",
+            "in": "query",
+            "required": false,
+            "description": "HH:MM 24h (default 12:00)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "14:30"
+          },
+          {
+            "name": "tz",
+            "in": "query",
+            "required": false,
+            "description": "IANA time zone of the birth place",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Europe/Madrid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/zodiac/chinese": {
+      "get": {
+        "summary": "Chinese zodiac year",
+        "operationId": "chinese",
+        "parameters": [
+          {
+            "name": "year",
+            "in": "query",
+            "required": true,
+            "description": "Year 1901-2099",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/zodiac/signs": {
+      "get": {
+        "summary": "All western signs",
+        "operationId": "signs",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

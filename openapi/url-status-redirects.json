@@ -1,0 +1,84 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "URL Status & Redirect Chain Checker",
+    "description": "HTTP status, full redirect chain (301/302/307/308), final URL, server and response time for any link. Detects loops. POST up to 20 URLs per call. Find broken links fast.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/status": {
+      "get": {
+        "summary": "Check URL",
+        "operationId": "url_status_redirects",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "description": "URL to check",
+            "schema": {
+              "type": "string"
+            },
+            "example": "http://github.com"
+          },
+          {
+            "name": "maxRedirects",
+            "in": "query",
+            "required": false,
+            "description": "Max redirects to follow (default 10)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "post": {
+        "summary": "Check up to 20 URLs",
+        "operationId": "check_many",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "urls": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "example": {
+                "urls": [
+                  "http://github.com",
+                  "https://example.com"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}

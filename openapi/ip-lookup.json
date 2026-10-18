@@ -1,0 +1,41 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "IP Lookup (owner, network, country) + My IP",
+    "description": "Who owns an IP address: network name, range, CIDR, organization, country and registration date from the Regional Internet Registries (RDAP). Without 'ip', returns the caller's IP, country, city and ASN.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/ip": {
+      "get": {
+        "summary": "IP info",
+        "operationId": "ip",
+        "parameters": [
+          {
+            "name": "ip",
+            "in": "query",
+            "required": false,
+            "description": "IPv4 or IPv6 (empty = your own IP)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "8.8.8.8"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

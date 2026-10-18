@@ -1,0 +1,158 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "World Calendar Converter API - Islamic Hebrew Chinese",
+    "description": "Convert dates between 13 calendars (Gregorian, Islamic Umm al-Qura and tabular, Hebrew, Persian, Chinese, Korean, Japanese, Buddhist, Indian, Coptic, Ethiopian, Minguo) and get the dates of Islamic, Jewish, Chinese and Persian holidays for any year 1900-2100.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/calendar/convert": {
+      "get": {
+        "summary": "Gregorian date in all calendars",
+        "operationId": "convert",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "description": "Gregorian date YYYY-MM-DD (default: today)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2026-10-12"
+          },
+          {
+            "name": "calendars",
+            "in": "query",
+            "required": false,
+            "description": "Optional comma list of calendar ids",
+            "schema": {
+              "type": "string"
+            },
+            "example": "hebrew,islamic-umalqura,persian"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/calendar/to-gregorian": {
+      "get": {
+        "summary": "Any calendar date to Gregorian",
+        "operationId": "to_gregorian",
+        "parameters": [
+          {
+            "name": "calendar",
+            "in": "query",
+            "required": true,
+            "description": "Calendar id",
+            "schema": {
+              "type": "string"
+            },
+            "example": "hebrew"
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "required": true,
+            "description": "Year in that calendar",
+            "schema": {
+              "type": "string"
+            },
+            "example": "5787"
+          },
+          {
+            "name": "month",
+            "in": "query",
+            "required": true,
+            "description": "Month number (Hebrew: name, e.g. Nisan)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Nisan"
+          },
+          {
+            "name": "day",
+            "in": "query",
+            "required": true,
+            "description": "Day of month",
+            "schema": {
+              "type": "string"
+            },
+            "example": "15"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/calendar/events": {
+      "get": {
+        "summary": "Religious and cultural holidays",
+        "operationId": "events",
+        "parameters": [
+          {
+            "name": "year",
+            "in": "query",
+            "required": true,
+            "description": "Gregorian year 1900-2100",
+            "schema": {
+              "type": "string"
+            },
+            "example": "2027"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "all, islamic, jewish, chinese or persian",
+            "schema": {
+              "type": "string"
+            },
+            "example": "all"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/calendar/list": {
+      "get": {
+        "summary": "Supported calendars",
+        "operationId": "list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

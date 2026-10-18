@@ -1,0 +1,186 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Spell Check API",
+    "description": "Fast English spell checker (US and UK): flags misspellings with ranked suggestions, offsets and an auto-corrected text. Drop-in replacement for the retired Bing Spell Check API (format=bing).",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/spellcheck": {
+      "get": {
+        "summary": "Check spelling",
+        "operationId": "spellcheck_get",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": true,
+            "description": "Text to check (max 20,000 characters)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "I recieve alot of emails abuot the the project."
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "required": false,
+            "description": "en-US (default), en-GB or en (any English). Also accepts mkt=en-US like Bing",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en-US"
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "required": false,
+            "description": "proof (default: spelling + repeated words) or spell (spelling only)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "proof"
+          },
+          {
+            "name": "max_suggestions",
+            "in": "query",
+            "required": false,
+            "description": "1-10 suggestions per error (default 4)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "4"
+          },
+          {
+            "name": "words",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated custom words to accept (brand names, jargon)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "TidyData,Kubernetes"
+          },
+          {
+            "name": "ignore_uppercase",
+            "in": "query",
+            "required": false,
+            "description": "Skip ALL-CAPS words like acronyms (true/false, default true)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "true"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "description": "Leave empty for the full response, or bing for the Bing Spell Check v7 response shape",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Errors with suggestions and corrected text"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "post": {
+        "summary": "Check spelling (long text in body: plain text, JSON or form field text=)",
+        "operationId": "spellcheck_post",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "required": false,
+            "description": "en-US (default), en-GB or en (any English). Also accepts mkt=en-US like Bing",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en-US"
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "required": false,
+            "description": "proof (default: spelling + repeated words) or spell (spelling only)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "proof"
+          },
+          {
+            "name": "max_suggestions",
+            "in": "query",
+            "required": false,
+            "description": "1-10 suggestions per error (default 4)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "4"
+          },
+          {
+            "name": "words",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated custom words to accept (brand names, jargon)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "TidyData,Kubernetes"
+          },
+          {
+            "name": "ignore_uppercase",
+            "in": "query",
+            "required": false,
+            "description": "Skip ALL-CAPS words like acronyms (true/false, default true)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "true"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "description": "Leave empty for the full response, or bing for the Bing Spell Check v7 response shape",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "text/plain": {
+              "schema": {
+                "type": "string"
+              },
+              "example": "Their going to definately acommodate us untill tommorow."
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Errors with suggestions and corrected text"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

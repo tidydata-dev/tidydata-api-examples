@@ -1,0 +1,117 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Country Data (250 countries, flags, currencies)",
+    "description": "All countries with ISO codes, names in any language, native name, capital, continent, calling codes, currencies, languages and emoji flag. Filter by continent, currency, language or search.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/countries": {
+      "get": {
+        "summary": "List / search countries",
+        "operationId": "countries",
+        "parameters": [
+          {
+            "name": "continent",
+            "in": "query",
+            "required": false,
+            "description": "Continent code (EU, AS, AF, NA, SA, OC, AN)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "EU"
+          },
+          {
+            "name": "currency",
+            "in": "query",
+            "required": false,
+            "description": "Currency code",
+            "schema": {
+              "type": "string"
+            },
+            "example": "EUR"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "required": false,
+            "description": "Language code",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "description": "Search text",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "description": "Language for localized names",
+            "schema": {
+              "type": "string"
+            },
+            "example": "en"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/countries/{code}": {
+      "get": {
+        "summary": "Country by code",
+        "operationId": "country",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "description": "ISO 3166-1 alpha-2",
+            "schema": {
+              "type": "string"
+            },
+            "example": "ES"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "description": "Language for localized name",
+            "schema": {
+              "type": "string"
+            },
+            "example": "es"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

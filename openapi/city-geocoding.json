@@ -1,0 +1,173 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Reverse Geocoding and City Search API",
+    "description": "Fast city-level geocoding for 171,000 places worldwide: reverse geocoding (coordinates to nearest town, region, country and time zone), place search by name and nearby places within a radius. No rate-limited upstream.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/geo/reverse": {
+      "get": {
+        "summary": "Reverse geocode coordinates",
+        "operationId": "reverse",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "required": true,
+            "description": "Latitude",
+            "schema": {
+              "type": "string"
+            },
+            "example": "40.4168"
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "required": true,
+            "description": "Longitude",
+            "schema": {
+              "type": "string"
+            },
+            "example": "-3.7038"
+          },
+          {
+            "name": "minPopulation",
+            "in": "query",
+            "required": false,
+            "description": "Only places with at least this population",
+            "schema": {
+              "type": "string"
+            },
+            "example": "0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/geo/search": {
+      "get": {
+        "summary": "Search places by name",
+        "operationId": "search",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "description": "City or town name",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Salamanca"
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "required": false,
+            "description": "Optional ISO country code filter",
+            "schema": {
+              "type": "string"
+            },
+            "example": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "1-50",
+            "schema": {
+              "type": "string"
+            },
+            "example": "10"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/v1/geo/nearby": {
+      "get": {
+        "summary": "Places within a radius",
+        "operationId": "nearby",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "required": true,
+            "description": "Latitude",
+            "schema": {
+              "type": "string"
+            },
+            "example": "40.97"
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "required": true,
+            "description": "Longitude",
+            "schema": {
+              "type": "string"
+            },
+            "example": "-5.66"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "required": false,
+            "description": "Radius in km (max 500)",
+            "schema": {
+              "type": "string"
+            },
+            "example": "25"
+          },
+          {
+            "name": "minPopulation",
+            "in": "query",
+            "required": false,
+            "description": "Minimum population",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1000"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "1-100",
+            "schema": {
+              "type": "string"
+            },
+            "example": "20"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

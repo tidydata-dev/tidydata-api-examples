@@ -1,0 +1,51 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Link Extractor (internal & external links of a page)",
+    "description": "Extract every link of a web page with anchor text, rel, nofollow flag and internal/external classification. Filter by type.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/links": {
+      "get": {
+        "summary": "Extract links",
+        "operationId": "links",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "description": "Page URL",
+            "schema": {
+              "type": "string"
+            },
+            "example": "https://www.wikipedia.org"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "all, internal or external",
+            "schema": {
+              "type": "string"
+            },
+            "example": "all"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

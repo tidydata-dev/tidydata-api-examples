@@ -1,0 +1,51 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Robots.txt Checker (is this URL allowed?)",
+    "description": "Check whether a URL may be crawled according to the site's robots.txt for any user agent, with the matching rule, sitemaps and crawl-delay.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://tidydata-api.tidydata.workers.dev"
+    }
+  ],
+  "paths": {
+    "/v1/robots": {
+      "get": {
+        "summary": "Check URL",
+        "operationId": "robots",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "description": "URL to check",
+            "schema": {
+              "type": "string"
+            },
+            "example": "https://www.google.com/search?q=test"
+          },
+          {
+            "name": "agent",
+            "in": "query",
+            "required": false,
+            "description": "User agent",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Googlebot"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

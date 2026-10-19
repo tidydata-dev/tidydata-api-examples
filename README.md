@@ -4,7 +4,7 @@ Ready-to-run examples for **63 small, fast JSON APIs** — QR codes, IP and DNS 
 currency rates, HTML table extraction, SEO audits, converters and more. Every API has a **free plan**.
 
 - 📚 Docs: https://developers.tidydata.workers.dev
-- 🧰 Postman collection: [`postman/TidyData.postman_collection.json`](postman/TidyData.postman_collection.json) (Import → File)
+- 🧰 Postman: [public workspace on the Postman API Network](https://www.postman.com/sorrymxrc-6632440/tidydata-apis) (fork it in one click) or [`postman/TidyData.postman_collection.json`](postman/TidyData.postman_collection.json) (Import → File)
 - 📄 OpenAPI 3 specs: [`openapi/`](openapi/)
 - 💻 Code: [`examples/curl`](examples/curl) · [`examples/python`](examples/python) · [`examples/javascript`](examples/javascript)
 - 🤖 MCP server for AI assistants: [tidydata-dev/tidydata-mcp](https://github.com/tidydata-dev/tidydata-mcp)
